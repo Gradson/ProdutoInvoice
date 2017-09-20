@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.gradson.atech.Invoice.aggregate.ItemInvoice;
+import br.com.gradson.atech.Invoice.aggregate.ItemInvoiceRepository;
+
 @Service
 @Transactional
 public class InvoiceService {
@@ -14,18 +17,16 @@ public class InvoiceService {
 	@Autowired
 	private InvoiceRepository invoiceRepository;
 	
-	public Invoice save(Invoice invoice) throws Exception {
+	public Invoice save(final Invoice invoice) throws Exception {
 		invoice.calculate();
-		Invoice invoiceSaved = invoiceRepository.save(invoice);
-		
-		return invoiceSaved.response();
+		return  invoiceRepository.save(invoice).response();
 	}
 
 	public Page<Invoice> findAll(Pageable pageable) {
 		return invoiceRepository.findAll(pageable);
 	}
 
-	public Page<Invoice> getAllByProductName(String productName, Pageable pageable) {
+	public Page<Invoice> getAllByProductName(final String productName, Pageable pageable) {
 		return invoiceRepository.getAllByProductName(productName, pageable);
 	}
 }

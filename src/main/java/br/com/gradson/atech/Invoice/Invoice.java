@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
 import br.com.gradson.atech.Invoice.aggregate.ItemInvoice;
@@ -83,8 +84,10 @@ public class Invoice implements Serializable{
 	}
 
 	public Invoice response() {
-		this.getItems().stream().forEach(item -> item.setInvoice(null));
-		return this;
+		Invoice response = new Invoice();
+		BeanUtils.copyProperties(this, response, "items");
+		
+		return response;
 	}
 
 }

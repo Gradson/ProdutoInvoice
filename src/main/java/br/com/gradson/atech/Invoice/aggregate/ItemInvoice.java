@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.gradson.atech.Invoice.Invoice;
 import br.com.gradson.atech.product.Product;
 import lombok.AllArgsConstructor;
@@ -46,6 +48,7 @@ public class ItemInvoice implements Serializable {
 	@NotNull
 	private BigDecimal price;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "INVOICE_ID", referencedColumnName = "ID")
 	private Invoice invoice;
