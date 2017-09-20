@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 	
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productRepository;
 
 	@PostMapping()
 	public Product create(@Valid @RequestBody Product product) {

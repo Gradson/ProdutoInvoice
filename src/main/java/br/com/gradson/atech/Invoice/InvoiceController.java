@@ -17,23 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class InvoiceController {
 	
 	@Autowired
-	private InvoiceRepository invoiceRepository;
+	private InvoiceService invoiceService;
 
 	@PostMapping()
 	public Invoice create(@Valid @RequestBody Invoice invoice) throws Exception {
-		invoice.calculate();
-		Invoice invoiceSaved = invoiceRepository.save(invoice);
-		
-		return invoiceSaved.response();
+		return invoiceService.save(invoice);
 	}
 	
 	@GetMapping
 	public Page<Invoice> getAll(Pageable pageable) {
-		return invoiceRepository.findAll(pageable);
+		return invoiceService.findAll(pageable);
 	}
 	
 	@GetMapping(value = "/search")
 	public Page<Invoice> getAllByProductName(@RequestParam(required = true) String productName, Pageable pageable) {
-		return invoiceRepository.getAllByProductName(productName, pageable);
+		return invoiceService.getAllByProductName(productName, pageable);
 	}
 }
