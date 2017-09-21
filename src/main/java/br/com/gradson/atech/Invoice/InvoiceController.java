@@ -1,5 +1,7 @@
 package br.com.gradson.atech.Invoice;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,14 @@ public class InvoiceController {
 	@Autowired
 	private InvoiceService invoiceService;
 
-	@PostMapping()
+	@PostMapping
 	public Invoice create(@Valid @RequestBody Invoice invoice) throws Exception {
 		return invoiceService.save(invoice);
+	}
+	
+	@PostMapping(value = "/create-async")
+	public boolean createAsync(@Valid @RequestBody List<Invoice> invoices) {
+		return invoiceService.createAsync(invoices);
 	}
 	
 	@GetMapping

@@ -14,9 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
@@ -50,6 +52,8 @@ public class Invoice implements Serializable{
 	@UpdateTimestamp
 	private Date updateDate;
 	
+	@NotNull
+	@NotBlank
 	private String number;
 
 	private String observation;
@@ -66,13 +70,12 @@ public class Invoice implements Serializable{
 			throw new Exception("not found items");
 		}
 		
-		
-		for (ItemInvoice itemInvoice : items) {
+		items.forEach(itemInvoice -> {
 			itemInvoice.setInvoice(this);
 			
 			BigDecimal itemValue = itemInvoice.getPrice().multiply(new BigDecimal(itemInvoice.getQuantity()));
 			this.total = getTotal().add(itemValue);
-		}
+		});
 	}
 	
 	public BigDecimal getTotal() {

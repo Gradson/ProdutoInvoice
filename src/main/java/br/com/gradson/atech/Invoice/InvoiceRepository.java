@@ -12,7 +12,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
 	@Query("select inv from Invoice inv where inv.id in "
             + "(select inv.id from Invoice inv join inv.items it "
-            + "join it.product p where p.name = :productName)")
+            + "join it.product p where p.name like %:productName%)")
 	Page<Invoice> getAllByProductName(@Param("productName") String productName, Pageable pageable);
 
 }

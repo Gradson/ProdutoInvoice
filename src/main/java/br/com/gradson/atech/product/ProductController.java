@@ -1,5 +1,7 @@
 package br.com.gradson.atech.product;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 	
 	@Autowired
-	private ProductService productRepository;
+	private ProductService productService;
 
 	@PostMapping()
 	public Product create(@Valid @RequestBody Product product) {
-		return productRepository.save(product);
+		return productService.save(product);
+	}
+	
+	@PostMapping(value = "/create-async")
+	public boolean createAsync(@Valid @RequestBody List<Product> products) {
+		return productService.createAsync(products);
 	}
 	
 	@GetMapping
 	public Page<Product> getAll(Pageable pageable) {
-		return productRepository.findAll(pageable);
+		return productService.findAll(pageable);
 	}
 }
