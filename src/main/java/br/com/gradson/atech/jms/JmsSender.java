@@ -18,7 +18,7 @@ public class JmsSender {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
-	public void toQueue(List<Object> objects, final JmsQueueType queue) {
+	public void toQueue(List<?> objects, final JmsQueueType queue) {
 		if(!CollectionUtils.isEmpty(objects)) {
 			objects.forEach(obj -> toQueue(obj, queue));
 		}

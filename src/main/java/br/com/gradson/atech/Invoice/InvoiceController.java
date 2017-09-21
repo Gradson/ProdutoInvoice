@@ -37,7 +37,9 @@ public class InvoiceController {
 	}
 	
 	@GetMapping(value = "/search")
-	public Page<Invoice> getAllByProductName(@RequestParam(required = true) String productName, Pageable pageable) {
-		return invoiceService.getAllByProductName(productName, pageable);
+	public Page<Invoice> getAllByProductName(@RequestParam(required = false, defaultValue = "") String productName, 
+											@RequestParam(required = false, defaultValue = "") String issuer,
+												Pageable pageable) {
+		return invoiceService.findBySearch(productName, issuer, pageable);
 	}
 }

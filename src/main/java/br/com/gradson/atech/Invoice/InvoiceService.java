@@ -31,8 +31,8 @@ public class InvoiceService {
 		return invoiceRepository.findAll(pageable);
 	}
 
-	public Page<Invoice> getAllByProductName(final String productName, Pageable pageable) {
-		return invoiceRepository.getAllByProductName(productName, pageable);
+	public Page<Invoice> findBySearch(final String productName,final String issuer, Pageable pageable) {
+		return invoiceRepository.getAllByProductName(productName, issuer, pageable);
 	}
 
 	public boolean createAsync(List<Invoice> invoices) {

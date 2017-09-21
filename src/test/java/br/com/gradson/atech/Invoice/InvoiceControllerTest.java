@@ -31,7 +31,7 @@ public class InvoiceControllerTest extends MockController {
 	
 	@Test
 	public void shouldCreateInvoice() throws Exception {
-		Invoice invoice = Invoice.builder().number("3344").build();
+		Invoice invoice = Invoice.builder().number("3344").issuer("tester").build();
 		mockMvc.perform(post(ENDPOINT).content(toJson(invoice))).andExpect(status().isOk());
 	}
 
@@ -49,11 +49,6 @@ public class InvoiceControllerTest extends MockController {
 	@Test
 	public void shouldGetAllInvoicesByProductName() throws Exception {
 		mockMvc.perform(get(ENDPOINT + "/search").param("productName", "celular")).andExpect(status().isOk());
-	}
-	
-	@Test
-	public void shoulNotGetInvoicesWithoutProductName() throws Exception {
-		mockMvc.perform(get(ENDPOINT + "/search")).andExpect(status().isBadRequest());
 	}
 	
 	@Test

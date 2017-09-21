@@ -12,7 +12,8 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
 	@Query("select inv from Invoice inv where inv.id in "
             + "(select inv.id from Invoice inv join inv.items it "
-            + "join it.product p where p.name like %:productName%)")
-	Page<Invoice> getAllByProductName(@Param("productName") String productName, Pageable pageable);
+            + "join it.product p where p.name like %:productName%) and inv.issuer like %:issuer%")
+	Page<Invoice> getAllByProductName(@Param("productName") String productName, 
+										@Param("issuer") String issuer, Pageable pageable);
 
 }

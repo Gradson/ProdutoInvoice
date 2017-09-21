@@ -44,7 +44,7 @@ public class InvoiceServiceIntegrationTest {
 	
 	@Test
 	public void shouldSaveInvoiceAndReturnWithoutItems() throws Exception {
-		Invoice invoice = Invoice.builder().number("045").items(buildItems("celular")).build();
+		Invoice invoice = Invoice.builder().number("045").issuer("tester").items(buildItems("celular")).build();
 		Invoice invoiceSaved = service.save(invoice);
 		
 		assertNotNull(invoiceSaved.getId());
@@ -53,13 +53,13 @@ public class InvoiceServiceIntegrationTest {
 	
 	@Test
 	public void shouldFindInvoicesByProductName() throws Exception {
-		Invoice invoice1 = Invoice.builder().number("001").items(buildItems("celular")).build();
-		Invoice invoice2 = Invoice.builder().number("002").items(buildItems("caixa", "tesoura")).build();
-		Invoice invoice3 = Invoice.builder().number("003").items(buildItems("mesa")).build();
+		Invoice invoice1 = Invoice.builder().number("001").issuer("tester").items(buildItems("celular")).build();
+		Invoice invoice2 = Invoice.builder().number("002").issuer("tester").items(buildItems("caixa", "tesoura")).build();
+		Invoice invoice3 = Invoice.builder().number("003").issuer("tester").items(buildItems("mesa")).build();
 		
 		saveInvoices(invoice1, invoice2, invoice3);
 		
-		Page<Invoice> invoicesPage = service.getAllByProductName("c", null);
+		Page<Invoice> invoicesPage = service.findBySearch("c", "", null);
 		
 		List<Invoice> invoices = invoicesPage.getContent();
 		assertEquals(2, invoices.size());

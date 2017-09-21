@@ -55,6 +55,10 @@ public class Invoice implements Serializable{
 	@NotNull
 	@NotBlank
 	private String number;
+	
+	@NotNull
+	@NotBlank
+	private String issuer;
 
 	private String observation;
 	
