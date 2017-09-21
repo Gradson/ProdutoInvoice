@@ -1,6 +1,6 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
-activemq
+activemq-data
 
 ### STS ###
 .apt_generated
