@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @EnableSpringDataWebSupport
-public class BaseControllerTest {
+public class MockController {
 	private static final MediaType APPLICATION_JSON = MediaType.APPLICATION_JSON;
 
 	protected MockMvc mockMvc;

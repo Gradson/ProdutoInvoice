@@ -11,9 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.gradson.atech.BaseControllerTest;
+import br.com.gradson.atech.MockController;
 
-public class ProductControllerTest extends BaseControllerTest {
+public class ProductControllerTest extends MockController {
 	
 	private static final String ENDPOINT = "/api/products";
 	
