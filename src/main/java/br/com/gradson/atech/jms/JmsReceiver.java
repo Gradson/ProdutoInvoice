@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import br.com.gradson.atech.Invoice.Invoice;
@@ -21,12 +22,12 @@ public class JmsReceiver {
 	private InvoiceService invoiceService;
 	
 	@JmsListener(destination="QUEUE_PRODUCT")
-	public void processProduct(final Product product) throws IOException {
+	public void processProduct(@Payload final Product product) throws IOException {
 		productService.save(product);
 	}
 	
 	@JmsListener(destination="QUEUE_INVOICE")
-	public void processInvoice(final Invoice invoice) throws Exception {
+	public void processInvoice(@Payload final Invoice invoice) throws Exception {
 		invoiceService.save(invoice);
 	}
 }
